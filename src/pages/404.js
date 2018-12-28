@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 import styled from '@emotion/styled'
-import Link from 'gatsby-link'
+import Image from 'gatsby-image'
+import { graphql, Link } from 'gatsby'
 
 import ImageShift from '../components/image-shift'
 import SEO from '../components/seo'
-import FourOhFour from '../images/404.jpeg'
 import { fadeInBottom } from '../style/animations'
 
 const Container = styled.div`
@@ -59,21 +59,31 @@ const Image = styled(ImageShift)`
   left: 0;
 `
 
-export default class OhNoFourOhFour extends Component {
-  render() {
-    return (
-      <React.Fragment>
-        <SEO title="404 - Not Found" />
-        <Container>
-          <Link to="/">
-            <ImageContainer>
-              <Header>Oh no! 404!</Header>
-              <Description>(Click this to go back to Home)</Description>
-              <Image src={FourOhFour} />
-            </ImageContainer>
-          </Link>
-        </Container>
-      </React.Fragment>
-    )
-  }
+export default function OnNoAFourOhFour({ data }) {
+  return (
+    <React.Fragment>
+      <SEO title="404 - Not Found" />
+      <Container>
+        <Link to="/">
+          <ImageContainer>
+            <Header>Oh no! 404!</Header>
+            <Description>(Click this to go back to Home)</Description>
+            <Image fluid={data.image.childImageSharp.fluid} />
+          </ImageContainer>
+        </Link>
+      </Container>
+    </React.Fragment>
+  )
 }
+
+export const pageQuery = graphql`
+  {
+    image: file(absolutePath: { regex: "/404.jpg/" }) {
+      childImageSharp {
+        fluid(maxWidth: 800) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+  }
+`

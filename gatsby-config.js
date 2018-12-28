@@ -39,6 +39,13 @@ module.exports = function themeConfig({
         },
       },
       {
+        resolve: 'gatsby-source-filesystem',
+        options: {
+          path: path.join(__dirname, 'src', 'images'),
+          name: 'images',
+        },
+      },
+      {
         resolve: `gatsby-transformer-remark`,
         options: {
           plugins: [

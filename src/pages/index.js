@@ -33,7 +33,7 @@ export default function Index({ data, location }) {
                 excerpt={post.frontmatter.excerpt || post.excerpt}
                 date={post.frontmatter.date}
                 title={post.frontmatter.title}
-                to={post.slug}
+                to={post.fields.slug}
               />
             </div>
           )
@@ -60,7 +60,9 @@ export const pageQuery = graphql`
           html
           excerpt(pruneLength: 160)
           timeToRead
-          slug
+          fields {
+            slug
+          }
           frontmatter {
             date(formatString: "MMMM DD, YYYY")
             rawDate: date
