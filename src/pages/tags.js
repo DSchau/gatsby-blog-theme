@@ -1,9 +1,10 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import Image from 'gatsby-image'
 import { graphql, Link } from 'gatsby'
 
 import SEO from '../components/seo'
+import TagHeader from '../components/tag-header'
+import { rhythm } from '../utils/typography'
 
 const Container = styled.div`
   display: flex;
@@ -23,21 +24,19 @@ const ListItem = styled.li``
 
 export default function Tags({ data }) {
   return (
-    <React.Fragment>
+    <Container>
       <SEO title="Tags" />
-      <Container>
-        <TagHeader text="All tags" />
-        <List>
-          {data.tags.group.map(({ name }) => {
-            return (
-              <ListItem key={name}>
-                <Link to={`/tags/${name}`}>{name}</Link>
-              </ListItem>
-            )
-          })}
-        </List>
-      </Container>
-    </React.Fragment>
+      <TagHeader text="All tags" />
+      <List>
+        {data.tags.group.map(({ name }) => {
+          return (
+            <ListItem key={name}>
+              <Link to={`/tags/${name}`}>{name}</Link>
+            </ListItem>
+          )
+        })}
+      </List>
+    </Container>
   )
 }
 

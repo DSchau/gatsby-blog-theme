@@ -50,16 +50,12 @@ const createTagPages = (createPage, edges) => {
     }
   })
 
-  const tags = Object.keys(posts)
-
   Object.keys(posts).forEach(tagName => {
-    const tag = posts[tagName]
     createPage({
       path: `/tags/${tagName}`,
       component: tagTemplate,
       context: {
-        tags,
-        tag,
+        tags: posts[tagName],
         tagName,
       },
     })
@@ -85,7 +81,7 @@ exports.createPages = function createPages({ actions, graphql }) {
     ) {
       edges {
         node {
-          excerpt(pruneLength: 250)
+          excerpt(pruneLength: 160)
           html
           id
           timeToRead
@@ -94,6 +90,7 @@ exports.createPages = function createPages({ actions, graphql }) {
           }
           frontmatter {
             date(formatString: "MMMM DD, YYYY")
+            excerpt
             draft
             tags
             title

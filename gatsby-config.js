@@ -1,4 +1,5 @@
 const path = require('path')
+const fs = require('fs')
 
 module.exports = function themeConfig({
   blogContent = path.join('content', 'blog'),
@@ -93,7 +94,7 @@ module.exports = function themeConfig({
       {
         resolve: `gatsby-plugin-page-creator`,
         options: {
-          path: require.resolve(`./src/pages`),
+          path: path.join(__dirname, 'src', 'pages'),
         },
       },
     ],
